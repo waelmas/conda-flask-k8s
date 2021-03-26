@@ -1,0 +1,21 @@
+Flask
+requests
+python-dotenv
+setuptools-rust
+pusher
+
+dnspython
+
+flask-cors
+# psycopg2
+# boto3
+
+click
+itsdangerous
+Jinja2
+MarkupSafe
+# uWSGI
+Werkzeug
+pyyaml
+
+ruamel_yaml

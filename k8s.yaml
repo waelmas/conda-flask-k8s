@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conda-template-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: conda-template
+  template:
+    metadata:
+      labels:
+        app: conda-template
+    spec:
+      # serviceAccountName: incrementum-admin
+      # automountServiceAccountToken: true
+      containers:
+      - name: conda-template-container
+        image: 432228403865.dkr.ecr.eu-central-1.amazonaws.com/conda-template:latest
+        env:
+          - name: PSQLPASSWORD
+            value: admin123
+          - name: PASSWORD
+            value: abc123
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        type: admin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: conda-template-service
+  name: conda-template-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: conda-template
+  type: LoadBalancer
